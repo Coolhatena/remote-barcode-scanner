@@ -17,7 +17,7 @@ while True:
 	try:
 		configData = loadConfig()
 		host = configData["ip"]
-		port = configData["port"]
+		port = int(configData["port"])
 		EOF = "EOF"
 		server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -31,8 +31,9 @@ while True:
 			print(f'Conexión aceptada de {client_address}')
 			while True:
 				message = client_socket.recv(1024).decode('utf-8')
+				print(f"Received: {message}")
 				if message:
-					pyautogui.write(message)
+					pyautogui.write(message, 0.01)
 					pyautogui.press("enter")
 				else:
 					print('No se recibió ningún dato.')
