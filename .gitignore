@@ -1,3 +1,4 @@
 build/
 dist/
 remote-barcode-scanner.spec
+__pycache__
