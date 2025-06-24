@@ -2,10 +2,18 @@ import pyautogui
 import json
 import socket
 import os
+import sys
+
+def get_base_path():
+    if getattr(sys, 'frozen', False):
+        # When the program is executed as .exe
+        return os.path.dirname(sys.executable)
+    else:
+        # When the program is executen as .py
+        return os.path.dirname(os.path.abspath(__file__))
 
 def loadConfig():
-	script_dir = os.path.dirname(os.path.abspath(__file__))
-	config_path = os.path.join(script_dir, 'config.json')
+	config_path = os.path.join(get_base_path(), 'config.json')
 	with open(config_path, 'r') as configFile:
 		configData = json.load(configFile)
 
